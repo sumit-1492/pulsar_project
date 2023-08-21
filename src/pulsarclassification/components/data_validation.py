@@ -138,10 +138,12 @@ class DataValidation:
             with open(self.validation_config.validated_status_report_file_name,'a') as f:
                 f.write(f">>>>>>>>>>>>unique value of each column<<<<<<<<<<<<<\n\n")
                 f.write(f">>>>>>>>>>>>unique value of each column in train data<<<<<<<<<<<<<\n\n")
+                f.write(f"shape of traing data : {df_train.shape}\n\n")
                 for feature in df_train.columns:
                         f.write(f"{feature} has {df_train[feature].nunique()} unique values \n\n")
 
                 f.write(f">>>>>>>>>>>>unique value of each column in industrial test data<<<<<<<<<<<<<\n\n")
+                f.write(f"shape of industrial test  data : {df_test.shape}\n\n")
                 for feature in df_test.columns:
                         f.write(f"{feature} has {df_test[feature].nunique()} unique values \n\n") 
             f.close()
