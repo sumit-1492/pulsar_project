@@ -5,3 +5,11 @@ data_ingestion_config:
   dataset_download_url: https://github.com/sumit-1492/datasets/raw/main/playground-series-s3e10.zip
   zip_data_dir_name: raw_data
   unzip_data_dir_name: ingested_data
+
+data_validation_config:
+  validated_root_dir_name: data_validation
+  validated_train_dir: training_data_for_model
+  validated_test_dir: industrial_test_data
+  validated_status_report_file_name: status.txt
+  validated_required_files: ["train", "test", "sample_submission"]
+  

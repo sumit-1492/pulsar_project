@@ -25,9 +25,13 @@ def read_yaml(yaml_file_path:str)->ConfigBox:
 @ensure_annotations
 def create_directories(directory_path:str,verbose=True):
     try:
-        os.makedirs(directory_path,exist_ok=True)
-        if verbose:
-            logging.info(f" Directory created in this: {directory_path} ")
+        if (not os.path.exists(directory_path)):
+            os.makedirs(directory_path,exist_ok=True)
+            if verbose:
+                logging.info(f" Directory created in this: {directory_path} ")
+        else:
+            if verbose:
+                logging.info(f" Directory already present: {directory_path} ")
 
     except  BoxValueError:
         raise ValueError(" Directory path is not present ")

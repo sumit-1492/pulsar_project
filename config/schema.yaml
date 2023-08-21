@@ -1,0 +1,16 @@
+number_of_feature_columns: 9
+
+datatype_of_columns:
+ id: int64
+ Mean_Integrated: float64
+ SD: float64
+ EK: float64
+ Skewness: float64
+ Mean_DMSNR_Curve: float64
+ SD_DMSNR_Curve: float64
+ EK_DMSNR_Curve: float64
+ Skewness_DMSNR_Curve: float64
+ Class: int64
+
+target_column: Class
+ 

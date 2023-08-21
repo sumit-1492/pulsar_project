@@ -1,7 +1,7 @@
 from pulsarclassification.logging import logging
 from pulsarclassification.constants import *
 from pulsarclassification.utils.common import read_yaml,create_directories
-from pulsarclassification.entity import DataIngestionConfiguration
+from pulsarclassification.entity import DataIngestionConfiguration,DataValidationConfiguration
 
 class ConfigurationManager:
 
@@ -12,9 +12,6 @@ class ConfigurationManager:
             create_directories(self.config.artifacts_dir_name)
             logging.info(f" Artifacts directory created at : {self.config.artifacts_dir_name} ")
 
-        except  BoxValueError:
-            raise ValueError(" Directory path is not present ")
-    
         except Exception as e:
             raise e
         
@@ -43,5 +40,35 @@ class ConfigurationManager:
             logging.info(f" Data ingestion configuration: {data_ingestion_config}")
 
             return data_ingestion_config
+        except Exception as e:
+            raise e
+        
+    def get_data_validation_configuration(self) -> DataValidationConfiguration:
+
+        try:
+            artifact_dir = self.config.artifacts_dir_name
+            config = self.config.data_validation_config
+
+            data_validation_dir = os.path.join(artifact_dir,config.validated_root_dir_name)
+            create_directories(data_validation_dir)
+
+            data_validation_train_dir = os.path.join(data_validation_dir,config.validated_train_dir)
+            create_directories(data_validation_train_dir)
+
+            data_validation_test_dir = os.path.join(data_validation_dir,config.validated_test_dir)
+            create_directories(data_validation_test_dir)
+
+            data_validation_config = DataValidationConfiguration(
+                validated_root_dir_name  = config.validated_root_dir_name,
+                validated_train_dir = data_validation_train_dir,
+                validated_test_dir = data_validation_test_dir,
+                validated_status_report_file_name = os.path.join(data_validation_dir,config.validated_status_report_file_name),
+                validated_required_files = config.validated_required_files
+            )
+
+            logging.info(f" Data validation configuration: {data_validation_config}")
+
+            return data_validation_config
+        
         except Exception as e:
             raise e
