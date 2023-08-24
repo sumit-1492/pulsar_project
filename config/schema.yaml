@@ -1,6 +1,6 @@
 number_of_feature_columns: 9
 
-numeriacl_columns:
+feature_columns:
   id
   Mean_Integrated
   SD

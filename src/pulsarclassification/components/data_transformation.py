@@ -27,7 +27,7 @@ class DataTransformation:
             model_data = pd.read_csv(model_data_file_path)
             industrial_data = pd.read_csv(industrial_data_file)
 
-            features = self.schema.numeriacl_columns.split(" ")
+            features = self.schema.feature_columns.split(" ")
             features.remove("id")
             model_data = model_data[features]
             features.remove(self.schema.target_column)
