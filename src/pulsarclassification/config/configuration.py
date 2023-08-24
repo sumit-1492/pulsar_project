@@ -1,7 +1,7 @@
 from pulsarclassification.logging import logging
 from pulsarclassification.constants import *
 from pulsarclassification.utils.common import read_yaml,create_directories
-from pulsarclassification.entity import DataIngestionConfiguration,DataValidationConfiguration
+from pulsarclassification.entity import DataIngestionConfiguration,DataValidationConfiguration,DataTransformationConfiguration
 
 class ConfigurationManager:
 
@@ -69,6 +69,43 @@ class ConfigurationManager:
             logging.info(f" Data validation configuration: {data_validation_config}")
 
             return data_validation_config
+        
+        except Exception as e:
+            raise e
+        
+    def get_data_transformation_configuration(self) -> DataTransformationConfiguration:
+
+        try:
+            artifact_dir = self.config.artifacts_dir_name
+            config = self.config.data_transformation_config
+
+            data_transformation_dir = os.path.join(artifact_dir,config.transformed_root_dir_name)
+            create_directories(data_transformation_dir)
+
+            data_transformation_train_dir = os.path.join(data_transformation_dir,config.transformed_train_dir)
+            create_directories(data_transformation_train_dir)
+
+            data_transformation_test_dir = os.path.join(data_transformation_dir,config.transformed_test_dir)
+            create_directories(data_transformation_test_dir)
+
+            data_transformation_industrial_data_dir = os.path.join(data_transformation_dir,config.transformed_industrial_data_dir)
+            create_directories(data_transformation_industrial_data_dir)
+
+            data_transformation_preprocess_data_dir = os.path.join(data_transformation_dir,config.transformed_preprocess_dir)
+            create_directories(data_transformation_preprocess_data_dir)
+
+
+            data_transformation_config = DataTransformationConfiguration(
+                transformed_root_dir_name = data_transformation_dir,
+                transformed_train_dir = data_transformation_train_dir,
+                transformed_test_dir =  data_transformation_test_dir,
+                transformed_industrial_data_dir =  data_transformation_industrial_data_dir,
+                transformed_preprocess_dir = data_transformation_preprocess_data_dir
+            )
+
+            logging.info(f" Data transformation configuration: {data_transformation_config}")
+
+            return data_transformation_config
         
         except Exception as e:
             raise e

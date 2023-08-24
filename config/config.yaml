@@ -12,4 +12,13 @@ data_validation_config:
   validated_test_dir: industrial_test_data
   validated_status_report_file_name: status.txt
   validated_required_files: ["train", "test", "sample_submission"]
+
+data_transformation_config:
+  transformed_root_dir_name: data_transformation
+  transformed_train_dir: training_data_for_model
+  transformed_test_dir: test_data_for_model
+  transformed_industrial_data_dir: industrial_test_data
+  transformed_preprocess_dir: preprocessed_pickle_file
+  
+
   

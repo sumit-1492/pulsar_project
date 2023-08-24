@@ -1,5 +1,17 @@
 number_of_feature_columns: 9
 
+numeriacl_columns:
+  id
+  Mean_Integrated
+  SD
+  EK
+  Skewness
+  Mean_DMSNR_Curve
+  SD_DMSNR_Curve
+  EK_DMSNR_Curve
+  Skewness_DMSNR_Curve
+  Class
+
 datatype_of_columns:
  id: int64
  Mean_Integrated: float64
@@ -13,4 +25,9 @@ datatype_of_columns:
  Class: int64
 
 target_column: Class
+
+class_value:
+  Class_0: 0
+  Class_1: 1
+
  

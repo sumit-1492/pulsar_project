@@ -17,3 +17,12 @@ class DataValidationConfiguration:
     validated_test_dir: Path
     validated_status_report_file_name: str
     validated_required_files:list
+
+@dataclass(frozen=True)
+class DataTransformationConfiguration:
+
+    transformed_root_dir_name: Path
+    transformed_train_dir: Path
+    transformed_test_dir: Path
+    transformed_industrial_data_dir: Path
+    transformed_preprocess_dir: Path

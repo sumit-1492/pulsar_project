@@ -33,3 +33,17 @@ DATA_VALIDATION_REQUIRE_KEY = "validated_required_files"
 
 VALIDATED_DATA_FILE_NAME_FOR_MODEL_TRAIN = 'pulsar.csv'
 VALIDATED_INDUSTRIALDATA_FILE_NAME = 'Industrial_pulsar_data.csv'
+
+# Data transformation related variable
+
+DATA_TRANSFORMATION_CONFIG_KEY = "data_transformation_config"
+DATA_TRANSFORMATION_ARTIFACT_DIR_NAME_KEY = "transformed_root_dir_name"
+DATA_TRANSFORMATION_TRAIN_DIR_NAME_KEY = "transformed_train_dir"
+DATA_TRANSFORMATION_TEST_DIR_NAME_KEY = "transformed_test_dir"
+DATA_TRANSFORMATION_INDUSTRIAL_DATA_NAME_KEY = "transformed_industrial_data_dir"
+DATA_TRANSFORMATION_PREPROCESS_DIR_NAME_KEY = "transformed_preprocess_dir"
+
+TRANSFORMED_PICKLE_FILE_NAME = 'data_preprocess.pkl'
+TRANSFORMED_MODEL_TRAIN_FILE_NAME = 'pulsar_train_data.csv'
+TRANSFORMED_MODEL_TEST_FILE_NAME = 'pulsar_test_data.csv'
+TRANSFORMED_INDUSTRIALDATA_FILE_NAME = 'Industrial_pulsar_data.csv'
