@@ -37,3 +37,10 @@ class ModelTrainerConfiguration:
     trained_model_FPR: float
     trained_model_RECALL: float
     trained_model_selection:str
+
+@dataclass(frozen=True)
+class ModelEvaluationConfiguration:
+
+    evaluated_model_root_dir_name: Path
+    evaluated_model_result_file_name: str
+    evaluated_model_result_file_column_name: list

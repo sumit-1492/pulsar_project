@@ -3,6 +3,7 @@ from pulsarclassification.constants import *
 from pulsarclassification.utils.common import read_yaml,create_directories
 from pulsarclassification.entity import DataIngestionConfiguration,DataValidationConfiguration
 from pulsarclassification.entity import DataTransformationConfiguration,ModelTrainerConfiguration
+from pulsarclassification.entity import ModelEvaluationConfiguration
 
 class ConfigurationManager:
 
@@ -136,6 +137,30 @@ class ConfigurationManager:
             logging.info(f" Model trainer configuration: {model_trainer_config}")
 
             return model_trainer_config
+        
+        except Exception as e:
+            raise e
+        
+    def get_model_evaluation_configuration(self) -> ModelEvaluationConfiguration:
+
+        try:
+            artifact_dir = self.config.artifacts_dir_name
+            config = self.config.model_evaluation_config
+
+            model_evaluation_dir = os.path.join(artifact_dir,config.evaluated_model_root_dir_name)
+            create_directories(model_evaluation_dir)
+
+            model_evaluated_csv_file = os.path.join(model_evaluation_dir,config[MODEL_EVALUATION_RESULT_FILE_NAME_KEY])
+
+            model_evaluation_config = ModelEvaluationConfiguration(
+                evaluated_model_root_dir_name = model_evaluation_dir,
+                evaluated_model_result_file_name = model_evaluated_csv_file,
+                evaluated_model_result_file_column_name = config.evaluated_model_result_file_column_name
+            )
+
+            logging.info(f" Model evaluation configuration: {model_evaluation_config}")
+
+            return model_evaluation_config
         
         except Exception as e:
             raise e
