@@ -1,7 +1,8 @@
 from pulsarclassification.logging import logging
 from pulsarclassification.constants import *
 from pulsarclassification.utils.common import read_yaml,create_directories
-from pulsarclassification.entity import DataIngestionConfiguration,DataValidationConfiguration,DataTransformationConfiguration
+from pulsarclassification.entity import DataIngestionConfiguration,DataValidationConfiguration
+from pulsarclassification.entity import DataTransformationConfiguration,ModelTrainerConfiguration
 
 class ConfigurationManager:
 
@@ -106,6 +107,35 @@ class ConfigurationManager:
             logging.info(f" Data transformation configuration: {data_transformation_config}")
 
             return data_transformation_config
+        
+        except Exception as e:
+            raise e
+
+    def get_model_trainer_configuration(self) -> ModelTrainerConfiguration:
+
+        try:
+            artifact_dir = self.config.artifacts_dir_name
+            config = self.config.model_trainer_config
+            param_config = read_yaml(MODEL_PARAMETER_FILE_PATH)
+
+            model_trainer_dir = os.path.join(artifact_dir,config.trained_model_root_dir_name)
+            create_directories(model_trainer_dir)
+
+            model_trainer_yaml_file = os.path.join(model_trainer_dir,MODEL_TRAINER_YAML_FILE_NAME_KEY)
+
+            model_trainer_config = ModelTrainerConfiguration(
+                trained_model_root_dir_name = model_trainer_dir,
+                trained_model_path_yaml_file = model_trainer_yaml_file,
+                trained_model_base_accuracy = config.trained_model_base_accuracy,
+                trained_model_overfit_value = config.trained_model_overfit_value,
+                trained_model_FPR           = config.trained_model_FPR,
+                trained_model_RECALL        = config.trained_model_RECALL,
+                trained_model_selection     = param_config[MODEL_SELECTION_KEY]
+            )
+
+            logging.info(f" Model trainer configuration: {model_trainer_config}")
+
+            return model_trainer_config
         
         except Exception as e:
             raise e

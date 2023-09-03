@@ -1,5 +1,6 @@
 import os
 import yaml
+import pickle
 from box.exceptions import BoxValueError
 from pulsarclassification.logging import logging
 from ensure import ensure_annotations
@@ -44,6 +45,30 @@ def get_file_size(path:Path) -> str:
     try:
         file_size_in_kb = round(os.path.getsize(path)/1024)
         return f"filesize approximately: ~ {file_size_in_kb} KB"
+    
+    except  BoxValueError:
+        raise ValueError(" path is not present ")
+    
+    except Exception as e:
+        raise e
+  
+def pickle_file_saving(model_file,path,saved_file_name) -> str:
+    try:
+        pickle.dump(model_file,open(os.path.join(path,saved_file_name),'wb'))
+        return f"pickle file saved in : {path} "
+    
+    except  BoxValueError:
+        raise ValueError(" path is not present ")
+    
+    except Exception as e:
+        raise e
+    
+def write_yaml(file_path,yaml_data) -> str:
+    try:
+        with open(file_path,"w") as file:
+            yaml.dump(yaml_data, file)
+        file.close()
+        return f" Model paths saved in  : {file_path}"
     
     except  BoxValueError:
         raise ValueError(" path is not present ")

@@ -26,3 +26,14 @@ class DataTransformationConfiguration:
     transformed_test_dir: Path
     transformed_industrial_data_dir: Path
     transformed_preprocess_dir: Path
+
+@dataclass(frozen=True)
+class ModelTrainerConfiguration:
+
+    trained_model_root_dir_name: Path
+    trained_model_path_yaml_file: str
+    trained_model_base_accuracy: float
+    trained_model_overfit_value: float
+    trained_model_FPR: float
+    trained_model_RECALL: float
+    trained_model_selection:str

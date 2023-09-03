@@ -19,6 +19,13 @@ data_transformation_config:
   transformed_test_dir: test_data_for_model
   transformed_industrial_data_dir: industrial_test_data
   transformed_preprocess_dir: preprocessed_pickle_file
-  
+
+model_trainer_config:
+  trained_model_root_dir_name: trained_model
+  trained_model_path_yaml_file: trained_model_path.yaml
+  trained_model_base_accuracy: 0.95
+  trained_model_overfit_value: 0.05
+  trained_model_FPR: 0.01
+  trained_model_RECALL: 0.90  
 
   
