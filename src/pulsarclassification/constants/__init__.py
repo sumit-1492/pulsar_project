@@ -72,3 +72,10 @@ SAVED_MODEL_FOLDER_KEY = f"model_{CURRENT_DATE_STAMP}"
 SAVED_MODEL_ARTIFACTS_KEY = "all_trained_model_paths"
 TRAINED_MODEL_FILE_NAME = "model.pkl"
 
+## Model evaluation related variable
+
+MODEL_EVALUATION_CONFIG_KEY = "model_evaluation_config"
+MODEL_EVALUATION_ARTIFACT_DIR_NAME_KEY = "evaluated_model_root_dir_name"
+MODEL_EVALUATION_RESULT_FILE_NAME_KEY = "evaluated_model_result_file_name"
+MODEL_EVALUATION_RESULT_FILE_COLUMN_NAME_KEY = "evaluated_model_result_file_column_name"
+
