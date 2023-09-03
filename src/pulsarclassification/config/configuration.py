@@ -3,7 +3,7 @@ from pulsarclassification.constants import *
 from pulsarclassification.utils.common import read_yaml,create_directories
 from pulsarclassification.entity import DataIngestionConfiguration,DataValidationConfiguration
 from pulsarclassification.entity import DataTransformationConfiguration,ModelTrainerConfiguration
-from pulsarclassification.entity import ModelEvaluationConfiguration
+from pulsarclassification.entity import ModelEvaluationConfiguration,ModelPusherConfiguration
 
 class ConfigurationManager:
 
@@ -161,6 +161,24 @@ class ConfigurationManager:
             logging.info(f" Model evaluation configuration: {model_evaluation_config}")
 
             return model_evaluation_config
+        
+        except Exception as e:
+            raise e
+        
+    def get_model_pusher_configuration(self) -> ModelPusherConfiguration:
+
+        try:
+            config = self.config.model_pusher_config
+
+            model_pusher_dir = os.path.join(ROOT_DIR,config.pushed_model_root_dir_name)
+            create_directories(model_pusher_dir)
+            model_pusher_config = ModelPusherConfiguration(
+                pushed_model_root_dir_name = model_pusher_dir
+            )
+
+            logging.info(f" Model pusher configuration: {model_pusher_config}")
+
+            return model_pusher_config
         
         except Exception as e:
             raise e

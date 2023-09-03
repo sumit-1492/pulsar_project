@@ -31,5 +31,7 @@ model_trainer_config:
 model_evaluation_config:
   evaluated_model_root_dir_name: evaluated_model_status
   evaluated_model_result_file_name: evaluated_model_result.csv
-  evaluated_model_result_file_column_name: ["model_path","train_accuracy","test_accuracy","train_fpr","test_fpr","train_recall","test_recall","status"]
+  evaluated_model_result_file_column_name: ["model_path","train_accuracy","test_accuracy","train_fpr","test_fpr","train_recall","test_recall","model_evaluation_status"]
   
+model_pusher_config:
+  pushed_model_root_dir_name: ModelRegistry

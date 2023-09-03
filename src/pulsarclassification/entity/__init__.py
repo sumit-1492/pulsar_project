@@ -44,3 +44,8 @@ class ModelEvaluationConfiguration:
     evaluated_model_root_dir_name: Path
     evaluated_model_result_file_name: str
     evaluated_model_result_file_column_name: list
+
+@dataclass(frozen=True)
+class ModelPusherConfiguration:
+
+    pushed_model_root_dir_name:Path

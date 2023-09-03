@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime
 
 ROOT_DIR = os.getcwd()
-CURRENT_DATE_STAMP = f"{datetime.now().strftime('%d%m%Y')}"
+CURRENT_DATE_STAMP = f"{datetime.now().strftime('%Y%m%d')}"
 
 ## config file path
 CONFIG_FOLDER_NAME = "config"
@@ -79,3 +79,12 @@ MODEL_EVALUATION_ARTIFACT_DIR_NAME_KEY = "evaluated_model_root_dir_name"
 MODEL_EVALUATION_RESULT_FILE_NAME_KEY = "evaluated_model_result_file_name"
 MODEL_EVALUATION_RESULT_FILE_COLUMN_NAME_KEY = "evaluated_model_result_file_column_name"
 
+## Model pusher related variable
+
+MODEL_PUSHER_CONFIG_KEY = "model_pusher_config"
+MODEL_PUSHER_ARTIFACT_DIR_NAME_KEY = "pushed_model_root_dir_name"
+
+PUSHED_MODEL_STATUS_FEATURE_NAME = "model_evaluation_status"
+PUSHED_MODEL_METRIC_EVALUATION_FEATURE_NAME = "test_accuracy"
+PUSHED_MODEL_FILE_PATH_FEATURE_NAME = "model_path"
+PUSHED_MODEL_FILE_NAME_KEY = f"model_{CURRENT_DATE_STAMP}.pkl"

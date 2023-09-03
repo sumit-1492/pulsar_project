@@ -5,6 +5,7 @@ from pulsarclassification.pipeline.stage_02_data_validation import DataValidatio
 from pulsarclassification.pipeline.stage_03_data_tranformation import DataTransformationPipeline
 from pulsarclassification.pipeline.stage_04_model_trainer import ModelTrainerPipeline
 from pulsarclassification.pipeline.stage_05_model_evaluation import ModelEvaluationPipeline
+from pulsarclassification.pipeline.stage_06_model_pusher import ModelPusherPipeline
 
 
 #logging.info("checking the log file after changing date time format") #checking of loogging files
@@ -54,6 +55,16 @@ try:
    logging.info(f">>>>>> {STAGE_NAME} started <<<<<<") 
    model_evaluator = ModelEvaluationPipeline()
    model_evaluator.main()
+   logging.info(f">>>>>> {STAGE_NAME} completed <<<<<<\n\n[x==================================================x")
+except Exception as e:
+        logging.exception(e)
+        raise e
+
+STAGE_NAME = " Model Pusher Stage"
+try:
+   logging.info(f">>>>>> {STAGE_NAME} started <<<<<<") 
+   model_pusher = ModelPusherPipeline()
+   model_pusher.main()
    logging.info(f">>>>>> {STAGE_NAME} completed <<<<<<\n\n[x==================================================x")
 except Exception as e:
         logging.exception(e)
