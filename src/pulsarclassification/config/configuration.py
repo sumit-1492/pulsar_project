@@ -121,7 +121,7 @@ class ConfigurationManager:
             model_trainer_dir = os.path.join(artifact_dir,config.trained_model_root_dir_name)
             create_directories(model_trainer_dir)
 
-            model_trainer_yaml_file = os.path.join(model_trainer_dir,MODEL_TRAINER_YAML_FILE_NAME_KEY)
+            model_trainer_yaml_file = os.path.join(model_trainer_dir,config[MODEL_TRAINER_YAML_FILE_NAME_KEY])
 
             model_trainer_config = ModelTrainerConfiguration(
                 trained_model_root_dir_name = model_trainer_dir,
