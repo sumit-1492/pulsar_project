@@ -1,5 +1,8 @@
+import os
+import sys
 from pulsarclassification.config.configuration import ConfigurationManager
 from pulsarclassification.components.data_ingestion import DataIngestion
+from pulsarclassification.exception import PulsarException
 
 class DataIngestionPipeline:
     def __init__(self):
@@ -13,4 +16,4 @@ class DataIngestionPipeline:
             data_ingestion.zip_file_downloader()
             data_ingestion.zip_file_extractor()
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)

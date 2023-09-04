@@ -1,4 +1,7 @@
+import os
+import sys
 from pulsarclassification.logging import logging
+from pulsarclassification.exception import PulsarException
 from pulsarclassification.constants import *
 from pulsarclassification.utils.common import read_yaml,create_directories
 from pulsarclassification.entity import DataIngestionConfiguration,DataValidationConfiguration
@@ -15,7 +18,7 @@ class ConfigurationManager:
             logging.info(f" Artifacts directory created at : {self.config.artifacts_dir_name} ")
 
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         
     def get_data_ingestion_config(self) -> DataIngestionConfiguration:
 
@@ -43,7 +46,7 @@ class ConfigurationManager:
 
             return data_ingestion_config
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         
     def get_data_validation_configuration(self) -> DataValidationConfiguration:
 
@@ -73,7 +76,7 @@ class ConfigurationManager:
             return data_validation_config
         
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         
     def get_data_transformation_configuration(self) -> DataTransformationConfiguration:
 
@@ -110,7 +113,7 @@ class ConfigurationManager:
             return data_transformation_config
         
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
 
     def get_model_trainer_configuration(self) -> ModelTrainerConfiguration:
 
@@ -139,7 +142,7 @@ class ConfigurationManager:
             return model_trainer_config
         
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         
     def get_model_evaluation_configuration(self) -> ModelEvaluationConfiguration:
 
@@ -163,7 +166,7 @@ class ConfigurationManager:
             return model_evaluation_config
         
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         
     def get_model_pusher_configuration(self) -> ModelPusherConfiguration:
 
@@ -181,4 +184,4 @@ class ConfigurationManager:
             return model_pusher_config
         
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)

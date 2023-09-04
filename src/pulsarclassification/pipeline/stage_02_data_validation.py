@@ -1,5 +1,8 @@
+import os
+import sys
 from pulsarclassification.config.configuration import ConfigurationManager
 from pulsarclassification.components.data_validation import DataValidation
+from pulsarclassification.exception import PulsarException
 
 class DataValidationPipeline:
     def __init__(self):
@@ -19,4 +22,4 @@ class DataValidationPipeline:
             data_validation.unique_value_of_columns_validation()
             data_validation.saving_validated_data()
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)

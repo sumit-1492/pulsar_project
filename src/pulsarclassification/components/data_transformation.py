@@ -1,8 +1,10 @@
 import os
+import sys
 import pandas as pd
 from pathlib import Path
 from sklearn.model_selection import StratifiedShuffleSplit
 from pulsarclassification.logging import logging
+from pulsarclassification.exception import PulsarException
 from pulsarclassification.constants import *
 from pulsarclassification.utils.common import read_yaml,create_directories,get_file_size
 from pulsarclassification.entity import DataValidationConfiguration,DataTransformationConfiguration
@@ -17,7 +19,7 @@ class DataTransformation:
             self.transformation_config = transformation_config
             self.schema = read_yaml(SCHEMA_FILE_PATH)
         except Exception as e:
-            raise e 
+            raise PulsarException(e,sys)
         
     def file_transformation_saving(self):
         try:
@@ -55,5 +57,5 @@ class DataTransformation:
             logging.info(f"{TRANSFORMED_INDUSTRIALDATA_FILE_NAME} saved in {self.transformation_config.transformed_industrial_data_dir}")
 
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         

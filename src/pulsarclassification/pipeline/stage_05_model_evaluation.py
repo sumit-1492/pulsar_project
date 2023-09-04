@@ -1,5 +1,8 @@
+import os
+import sys
 from pulsarclassification.config.configuration import ConfigurationManager
 from pulsarclassification.components.model_evaluation import ModelEvaluation
+from pulsarclassification.exception import PulsarException
 
 class ModelEvaluationPipeline:
     def __init__(self):
@@ -16,4 +19,4 @@ class ModelEvaluationPipeline:
                                         modelevaluation_config=model_evaluation_config)
             model_evaluator.get_model_evaluation_result()
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)

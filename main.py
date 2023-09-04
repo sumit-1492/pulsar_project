@@ -1,5 +1,7 @@
 import os
+import sys
 from pulsarclassification.logging import logging
+from pulsarclassification.exception import PulsarException
 from pulsarclassification.pipeline.stage_01_data_ingestion import DataIngestionPipeline
 from pulsarclassification.pipeline.stage_02_data_validation import DataValidationPipeline
 from pulsarclassification.pipeline.stage_03_data_tranformation import DataTransformationPipeline
@@ -17,8 +19,8 @@ try:
    data_ingestion.main()
    logging.info(f">>>>>> {STAGE_NAME} completed <<<<<<\n\n[x==================================================x")
 except Exception as e:
-        logging.exception(e)
-        raise e
+   logging.exception(e)
+   raise PulsarException(e,sys)
 
 STAGE_NAME = " Data Validation Stage"
 try:
@@ -27,8 +29,8 @@ try:
    data_validation.main()
    logging.info(f">>>>>> {STAGE_NAME} completed <<<<<<\n\n[x==================================================x")
 except Exception as e:
-        logging.exception(e)
-        raise e
+   logging.exception(e)
+   raise PulsarException(e,sys)
 
 STAGE_NAME = " Data Transformation Stage"
 try:
@@ -37,8 +39,8 @@ try:
    data_transformation.main()
    logging.info(f">>>>>> {STAGE_NAME} completed <<<<<<\n\n[x==================================================x")
 except Exception as e:
-        logging.exception(e)
-        raise e
+   logging.exception(e)
+   raise PulsarException(e,sys)
 
 STAGE_NAME = " Model Training Stage"
 try:
@@ -47,8 +49,8 @@ try:
    model_trainer.main()
    logging.info(f">>>>>> {STAGE_NAME} completed <<<<<<\n\n[x==================================================x")
 except Exception as e:
-        logging.exception(e)
-        raise e
+   logging.exception(e)
+   raise PulsarException(e,sys)
 
 STAGE_NAME = " Model Evaluation Stage"
 try:
@@ -57,8 +59,8 @@ try:
    model_evaluator.main()
    logging.info(f">>>>>> {STAGE_NAME} completed <<<<<<\n\n[x==================================================x")
 except Exception as e:
-        logging.exception(e)
-        raise e
+   logging.exception(e)
+   raise PulsarException(e,sys)
 
 STAGE_NAME = " Model Pusher Stage"
 try:
@@ -67,5 +69,6 @@ try:
    model_pusher.main()
    logging.info(f">>>>>> {STAGE_NAME} completed <<<<<<\n\n[x==================================================x")
 except Exception as e:
-        logging.exception(e)
-        raise e
+   logging.exception(e)
+   raise PulsarException(e,sys)
+

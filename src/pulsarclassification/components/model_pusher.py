@@ -1,10 +1,12 @@
 #stage - 6 : updating components
 
 import os
+import sys
 import importlib
 import pandas as pd
 from pathlib import Path
 from pulsarclassification.logging import logging
+from pulsarclassification.exception import PulsarException
 from pulsarclassification.constants import *
 from pulsarclassification.utils.common import pickle_file_saving
 from pulsarclassification.entity import ModelEvaluationConfiguration,ModelPusherConfiguration
@@ -18,7 +20,7 @@ class ModelPusher:
             self.modelevaluation_config = modelevaluation_config
             self.modelpusher_config = modelpusher_config
         except Exception as e:
-            raise e 
+            raise PulsarException(e,sys) 
         
     def get_model_pusher(self):
         try:
@@ -31,4 +33,4 @@ class ModelPusher:
            pickle_file_saving(final_model,self.modelpusher_config.pushed_model_root_dir_name,PUSHED_MODEL_FILE_NAME_KEY)
            logging.info(f"Final model saved in : {self.modelpusher_config.pushed_model_root_dir_name}")
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)

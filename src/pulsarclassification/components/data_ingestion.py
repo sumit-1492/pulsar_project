@@ -1,8 +1,10 @@
 import os
+import sys
 from pathlib import Path
 import urllib.request as request
 import zipfile
 from pulsarclassification.logging import logging
+from pulsarclassification.exception import PulsarException
 from pulsarclassification.utils.common import get_file_size
 from pulsarclassification.entity import DataIngestionConfiguration
 
@@ -12,7 +14,7 @@ class DataIngestion:
         try:
             self.config = config
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         
     def zip_file_downloader(self):
 
@@ -26,7 +28,7 @@ class DataIngestion:
             else:
                 logging.info(f"File already exists of size: {get_file_size(Path(zip_data_path))}") 
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         
     def zip_file_extractor(self):
 
@@ -36,4 +38,4 @@ class DataIngestion:
                 zip_file.extractall(unzip_data_path)
             logging.info(f"Data unzipped in: {unzip_data_path}")
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)

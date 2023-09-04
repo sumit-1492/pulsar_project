@@ -1,7 +1,9 @@
 import os
+import sys
 import pandas as pd
 from pathlib import Path
 from pulsarclassification.logging import logging
+from pulsarclassification.exception import PulsarException
 from pulsarclassification.constants import *
 from pulsarclassification.utils.common import read_yaml,create_directories,get_file_size
 from pulsarclassification.entity import DataIngestionConfiguration,DataValidationConfiguration
@@ -15,7 +17,7 @@ class DataValidation:
             self.validation_config = validation_config
             self.schema = read_yaml(SCHEMA_FILE_PATH)
         except Exception as e:
-            raise e 
+            raise PulsarException(e,sys)
         
     def file_exist_validation(self):
         try:
@@ -34,7 +36,7 @@ class DataValidation:
             logging.info(f"Validation status updated: {self.validation_config.validated_status_report_file_name}")
             return file_exist_status
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         
     def number_of_columns_validation(self):
         try:
@@ -65,7 +67,7 @@ class DataValidation:
             logging.info(f"Validation status updated: {self.validation_config.validated_status_report_file_name}")
             return vs
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         
     def datatype_of_columns_validation(self):
         try:
@@ -96,7 +98,7 @@ class DataValidation:
             logging.info(f"Validation status updated: {self.validation_config.validated_status_report_file_name}")
             return vs
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         
     def null_value_of_columns_validation(self):
         try:
@@ -125,7 +127,7 @@ class DataValidation:
             logging.info(f"Validation status updated: {self.validation_config.validated_status_report_file_name}")
             return vs
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         
     def unique_value_of_columns_validation(self):
         try:
@@ -149,7 +151,7 @@ class DataValidation:
             f.close()
             logging.info(f"Validation status updated: {self.validation_config.validated_status_report_file_name}")
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         
     def saving_validated_data(self):
         try:
@@ -169,4 +171,4 @@ class DataValidation:
             logging.info(f"Validated industrial test data saved in : {validated_industrial_test_data_file_path}")
             
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)

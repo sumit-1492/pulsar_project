@@ -1,5 +1,8 @@
+import os
+import sys
 from pulsarclassification.config.configuration import ConfigurationManager
 from pulsarclassification.components.model_trainer import ModelTrainer
+from pulsarclassification.exception import PulsarException
 
 class ModelTrainerPipeline:
     def __init__(self):
@@ -14,4 +17,4 @@ class ModelTrainerPipeline:
                                         modeltrainer_config = model_trainer_config)
             model_trainer.save_model()
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)

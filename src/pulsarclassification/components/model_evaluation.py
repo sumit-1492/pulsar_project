@@ -1,12 +1,14 @@
 #stage - 6 : updating components
 
 import os
+import sys
 import importlib
 from sklearn import metrics
 import pandas as pd
 from pathlib import Path
 from sklearn.model_selection import StratifiedShuffleSplit
 from pulsarclassification.logging import logging
+from pulsarclassification.exception import PulsarException
 from pulsarclassification.constants import *
 from pulsarclassification.utils.common import read_yaml
 from pulsarclassification.entity import DataTransformationConfiguration,ModelTrainerConfiguration
@@ -25,7 +27,7 @@ class ModelEvaluation:
             self.modelevaluation_config = modelevaluation_config
             self.schema = read_yaml(SCHEMA_FILE_PATH)
         except Exception as e:
-            raise e 
+            raise PulsarException(e,sys) 
         
     def get_data_for_evaluation(self):
         try:
@@ -50,15 +52,18 @@ class ModelEvaluation:
             return train_data_input_features,train_data_output_features,test_data_input_features,test_data_output_features
 
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         
     def model_evaluate(self,model,X,y):
-        y_pred = model.predict(X)
-        accuracy = accuracy_score(y,y_pred)
-        tn,fp,fn,tp = confusion_matrix(y, y_pred, labels=[0, 1]).ravel()
-        FPR = fp/(tn+fp)
-        RECALL = tp/(tp+fn)
-        return accuracy,FPR,RECALL
+        try:
+            y_pred = model.predict(X)
+            accuracy = accuracy_score(y,y_pred)
+            tn,fp,fn,tp = confusion_matrix(y, y_pred, labels=[0, 1]).ravel()
+            FPR = fp/(tn+fp)
+            RECALL = tp/(tp+fn)
+            return accuracy,FPR,RECALL
+        except Exception as e:
+            raise PulsarException(e,sys)
 
     def get_model_evaluation_result(self):
         try:
@@ -98,4 +103,4 @@ class ModelEvaluation:
             df_result.to_csv(self.modelevaluation_config.evaluated_model_result_file_name,index=False)
             logging.info(f" Model result saved in : {self.modelevaluation_config.evaluated_model_result_file_name} ")
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)

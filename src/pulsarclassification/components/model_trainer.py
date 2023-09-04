@@ -1,11 +1,13 @@
 #stage - 6 : updating components
 
 import os
+import sys
 import importlib
 import pandas as pd
 from pathlib import Path
 from sklearn.model_selection import StratifiedShuffleSplit
 from pulsarclassification.logging import logging
+from pulsarclassification.exception import PulsarException
 from pulsarclassification.constants import *
 from pulsarclassification.utils.common import read_yaml,create_directories,pickle_file_saving,write_yaml
 from pulsarclassification.entity import DataTransformationConfiguration,ModelTrainerConfiguration
@@ -20,7 +22,7 @@ class ModelTrainer:
             self.modeltrainer_config = modeltrainer_config
             self.schema = read_yaml(SCHEMA_FILE_PATH)
         except Exception as e:
-            raise e 
+            raise PulsarException(e,sys) 
         
     def get_data_for_training(self):
         try:
@@ -38,7 +40,7 @@ class ModelTrainer:
             return input_features,output_features
 
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
         
     def get_model(self,modellibrary,classificationmodel,modelparameters,inputfeatures,outputfeatures):
         try:
@@ -48,7 +50,7 @@ class ModelTrainer:
             model.fit(inputfeatures,outputfeatures)
             return model
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
     
     def save_model(self):
         try:
@@ -89,4 +91,4 @@ class ModelTrainer:
             logging.info(f"Model paths updated in yaml file: {self.modeltrainer_config.trained_model_path_yaml_file}")
             
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)

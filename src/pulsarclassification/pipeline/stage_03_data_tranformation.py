@@ -1,5 +1,8 @@
+import os
+import sys
 from pulsarclassification.config.configuration import ConfigurationManager
 from pulsarclassification.components.data_transformation import DataTransformation
+from pulsarclassification.exception import PulsarException
 
 class DataTransformationPipeline:
     def __init__(self):
@@ -14,4 +17,4 @@ class DataTransformationPipeline:
                                             transformation_config=data_transformation_config)
             data_transformation.file_transformation_saving()
         except Exception as e:
-            raise e
+            raise PulsarException(e,sys)
