@@ -171,12 +171,21 @@ class ConfigurationManager:
     def get_model_pusher_configuration(self) -> ModelPusherConfiguration:
 
         try:
+            artifact_dir = self.config.artifacts_dir_name
             config = self.config.model_pusher_config
+
+            model_pusher_info_dir = os.path.join(artifact_dir,config.pushed_model_information_dir_name)
+            create_directories(model_pusher_info_dir)
 
             model_pusher_dir = os.path.join(ROOT_DIR,config.pushed_model_root_dir_name)
             create_directories(model_pusher_dir)
+
+            model_pusher_yaml_file = os.path.join(model_pusher_info_dir,config[MODEL_PUSHER_YAML_FILE_NAME_KEY])
+            
             model_pusher_config = ModelPusherConfiguration(
-                pushed_model_root_dir_name = model_pusher_dir
+                pushed_model_root_dir_name = model_pusher_dir,
+                pushed_model_information_dir_name = model_pusher_info_dir,
+                pushed_model_path_yaml_file = model_pusher_yaml_file
             )
 
             logging.info(f" Model pusher configuration: {model_pusher_config}")

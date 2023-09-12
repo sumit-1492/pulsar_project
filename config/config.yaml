@@ -35,3 +35,6 @@ model_evaluation_config:
   
 model_pusher_config:
   pushed_model_root_dir_name: ModelRegistry
+  pushed_model_information_dir_name: pushed_model_info
+  pushed_model_path_yaml_file: pushed_model_path.yaml
+

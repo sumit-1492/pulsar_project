@@ -49,3 +49,5 @@ class ModelEvaluationConfiguration:
 class ModelPusherConfiguration:
 
     pushed_model_root_dir_name:Path
+    pushed_model_information_dir_name: Path
+    pushed_model_path_yaml_file: str
