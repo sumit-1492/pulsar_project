@@ -20,7 +20,7 @@ class InstanceData:
                 Skewness_DMSNR_Curve: float):
         
         try:
-            logging.info(f"===============Data Instance prediction log started===============")
+            logging.info(f"===============Instance prediction log started===============")
             self.Mean_Integrated = Mean_Integrated
             self.SD = SD
             self.EK = EK
@@ -56,7 +56,7 @@ class BatchData:
     def __init__(self,batch_csv_file_path:Path):
 
         try:
-            logging.info(f"===============Data Batch prediction log started===============")
+            logging.info(f"===============Batch prediction log started===============")
             self.batch_csv_file_path = batch_csv_file_path
         except Exception as e:
             raise PulsarException(e,sys)
@@ -110,8 +110,11 @@ class ModelPredict:
             raise PulsarException(e,sys)
 
     def predict(self,data):
-        pushed_model_config = read_yaml(self.modelpusher_config.pushed_model_path_yaml_file)
-        model = pd.read_pickle(pushed_model_config[PUSHED_MODEL_ARTIFACTS_KEY]['model_path'])
-        logging.info(f"latest model read from : {pushed_model_config[PUSHED_MODEL_ARTIFACTS_KEY]['model_path']} ")
-        result = model.predict(data)
-        return result
+        try:
+            pushed_model_config = read_yaml(self.modelpusher_config.pushed_model_path_yaml_file)
+            model = pd.read_pickle(pushed_model_config[PUSHED_MODEL_ARTIFACTS_KEY]['model_path'])
+            logging.info(f"latest model read from : {pushed_model_config[PUSHED_MODEL_ARTIFACTS_KEY]['model_path']}")
+            result = model.predict(data)
+            return result
+        except Exception as e:
+            raise PulsarException(e,sys)

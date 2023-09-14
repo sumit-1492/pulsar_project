@@ -161,3 +161,4 @@ cython_debug/
 # folder do not want in git
 
 artifacts/
+PREDICTED_MODEL_RESULT/
