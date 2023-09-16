@@ -4,7 +4,7 @@ from datetime import datetime
 
 ROOT_DIR = os.getcwd()
 CURRENT_DATE_STAMP = f"{datetime.now().strftime('%Y%m%d')}"
-CURRENT_DATE_TIME_STAMP = f"{datetime.now().strftime('%Y-%m-%d-%H-%M-%S')}"
+CURRENT_DATE_TIME_STAMP = f"{datetime.now().strftime('%Y%m%d%H%M%S')}"
 
 ## config file path
 CONFIG_FOLDER_NAME = "config"

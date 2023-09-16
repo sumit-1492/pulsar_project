@@ -14,11 +14,12 @@ pulsar_predict = ModelPredict()
 
 prediction_data_directory = os.path.join(ROOT_DIR,MODEL_PREDICTION_ARTIFACT_DIR_NAME)
 create_directories(prediction_data_directory)
-batch_data_save_dir = os.path.join(prediction_data_directory,MODEL_PREDICTION_BATCH_DIR_NAME)
-create_directories(batch_data_save_dir)
-instance_data_save_dir = os.path.join(prediction_data_directory,MODEL_PREDICTION_INSTANCE_DIR_NAME)
-create_directories(instance_data_save_dir)
 
+batch_data_directory = os.path.join(prediction_data_directory,"BatchData")
+create_directories(batch_data_directory)
+
+instance_data_directory = os.path.join(prediction_data_directory,"InstanceData")
+create_directories(instance_data_directory)
 
 app = Flask(__name__)
 
@@ -68,6 +69,9 @@ def predict():
             
             pulsar_df = pulsar_data.get_instance_data_frame()
 
+            instance_data_save_dir = os.path.join(instance_data_directory,MODEL_PREDICTION_INSTANCE_DIR_NAME)
+            create_directories(instance_data_save_dir)
+
             pulsar_df.to_csv(os.path.join(instance_data_save_dir,"pulsar_instant_data.csv"),index=False)
 
             pulsar_predicton_result = pulsar_predict.predict(pulsar_df)
@@ -93,6 +97,9 @@ def perform_batch_prediction():
         return render_template('batch.html')
     else:
     
+        batch_data_save_dir = os.path.join(batch_data_directory,MODEL_PREDICTION_BATCH_DIR_NAME)
+        create_directories(batch_data_save_dir)
+
         file = request.files['csv_file']  # Update the key to 'csv_file'
 
         # Check if the file has a valid extension

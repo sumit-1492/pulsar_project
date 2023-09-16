@@ -40,7 +40,7 @@ class InstanceData:
                                     "SD": [self.SD],
                                     "EK": [self.EK],
                                     "Skewness": [self.Skewness],
-                                    "Mean_DMSNR_Curve": [self.Mean_DMSNR_Curved],
+                                    "Mean_DMSNR_Curve": [self.Mean_DMSNR_Curve],
                                     "SD_DMSNR_Curve": [self.SD_DMSNR_Curve],
                                     "EK_DMSNR_Curve": [self.EK_DMSNR_Curve],
                                     "Skewness_DMSNR_Curve": [self.Skewness_DMSNR_Curve]
