@@ -162,3 +162,5 @@ cython_debug/
 
 artifacts/
 PREDICTED_MODEL_RESULT/
+logs/
+dags/data/

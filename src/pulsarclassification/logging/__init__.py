@@ -1,6 +1,6 @@
 import logging
 import os,sys
-from datetime_1 import datetime
+from datetime import datetime
 
 root_dir = os.getcwd()
 LOG_DIR = "pulsarlogs"
